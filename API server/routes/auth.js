@@ -11,11 +11,10 @@ function authenticateToken(req, res, next) {
     }
 
     jwt.verify(token, SECRET, (err, decoded) => {
-        
         if (err) {
             return res.status(403).json({ message: 'Невалиден токен' });
         }
-
+        console.log(decoded);
         // Проверяваме дали в payload има нашата "дума"
         if (decoded && decoded.accessKey !== 'super-access') {
             return res.status(403).json({ message: 'Невалидна ключова дума в токена' });
